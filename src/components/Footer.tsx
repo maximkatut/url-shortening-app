@@ -95,12 +95,12 @@ const Footer = () => {
   return (
     <FooterBlock>
       <LogoImg src={logo} alt="Logo" />
-      {LISTS.map((arr: string[]) => {
+      {LISTS.map((arr: string[], index) => {
         return (
-          <List>
-            {arr.map((item) => {
+          <List key={index}>
+            {arr.map((item, index) => {
               return (
-                <Item>
+                <Item key={index}>
                   <a href="/">{item}</a>
                 </Item>
               );
@@ -109,9 +109,9 @@ const Footer = () => {
         );
       })}
       <SocialList>
-        {SOCIAL_IMG.map((img) => {
+        {SOCIAL_IMG.map((img, index) => {
           return (
-            <li>
+            <li key={index}>
               <a href="/">
                 <SocialImg src={img} />
               </a>

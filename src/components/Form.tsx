@@ -1,6 +1,10 @@
 import styled from "styled-components";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import bg from "../img/bg-shorten-desktop.svg";
 import { TABLET_WIDTH } from "../utils/variables";
+import { useState } from "react";
 
 const FormBlock = styled.form`
   z-index: 10;
@@ -55,13 +59,54 @@ export const Button = styled.button`
   }
 `;
 
+const Error = styled.p`
+  text-align: center;
+  color: var(--color-error);
+`;
+
+type Inputs = {
+  url: string;
+};
+
+const schema = yup
+  .object({
+    url: yup
+      .string()
+      .matches(
+        /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm,
+        {
+          excludeEmptyString: true,
+        }
+      )
+      .required(),
+  })
+  .required();
+
 const Form = () => {
+  const [isLoading, setIsLoading] = useState<boolean>();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>({ resolver: yupResolver(schema) });
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data);
+  };
+
   return (
     <section>
-      <FormBlock onSubmit={() => alert(222)}>
-        <Input placeholder="Shorten a link here..." />
+      <FormBlock onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          {...register("url", { required: true })}
+          placeholder="Shorten a link here..."
+          type="text"
+          disabled={isLoading}
+        />
         <Button type="submit">Shorten It!</Button>
       </FormBlock>
+      <Error>{errors.url && <span>This field is required and accepting only urls</span>}</Error>
     </section>
   );
 };
