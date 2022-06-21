@@ -1,19 +1,9 @@
 import styled from "styled-components";
 import SVG from "react-inlinesvg";
 import logo from "../img/logo.svg";
-import fb from "../img/icon-facebook.svg";
-import ig from "../img/icon-instagram.svg";
-import tw from "../img/icon-twitter.svg";
-import pi from "../img/icon-pinterest.svg";
+
 import { TABLET_WIDTH } from "../utils/variables";
-
-const LISTS = [
-  ["Features", "Link Shortening", "Branded Links", "Analytics"],
-  ["Resources", "Blog", "Developers", "Support"],
-  ["Company", "About", "Our Team", "Careers", "Contact"],
-];
-
-const SOCIAL_IMG = [fb, ig, tw, pi];
+import { FOOTER_MENU, SOCIAL_IMG } from "../utils/const";
 
 const FooterBlock = styled.footer`
   display: flex;
@@ -95,7 +85,7 @@ const Footer = () => {
   return (
     <FooterBlock>
       <LogoImg src={logo} alt="Logo" />
-      {LISTS.map((arr: string[], index) => {
+      {FOOTER_MENU.map((arr: string[], index) => {
         return (
           <List key={index}>
             {arr.map((item, index) => {

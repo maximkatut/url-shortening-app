@@ -14,7 +14,7 @@ export const useLocalStorage = (key: string) => {
 
   const setValue = (value: IAdaptedData) => {
     try {
-      setStoredValue((prevState) => [...prevState, value]);
+      setStoredValue((prevState) => [value, ...prevState]);
       setStoredValue((prevState) => {
         window.localStorage.setItem(key, JSON.stringify(prevState));
         return prevState;

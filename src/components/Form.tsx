@@ -1,12 +1,17 @@
 import styled from "styled-components";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, FieldError } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import bg from "../img/bg-shorten-desktop.svg";
-import { TABLET_WIDTH } from "../utils/variables";
+import { regex, TABLET_WIDTH } from "../utils/variables";
 import { useState } from "react";
 
+import { api } from "../api";
+import { dataAdapter, IAdaptedData } from "../utils/dataAdapter";
+
 const FormBlock = styled.form`
+  display: flex;
+  position: relative;
   z-index: 10;
   margin-top: 50px;
   padding: 50px;
@@ -17,18 +22,28 @@ const FormBlock = styled.form`
   border-radius: 10px;
 
   @media screen and (max-width: ${TABLET_WIDTH}) {
+    display: block;
     margin-top: 0px;
     padding: 24px;
   }
 `;
 
-const Input = styled.input`
+interface InputProps {
+  error: FieldError | undefined;
+}
+
+const Input = styled.input<InputProps>`
   background-color: #fff;
   padding: 20px 50px;
   font-size: 22px;
-  width: 77%;
+  width: 75%;
   margin-right: 20px;
   border-radius: 10px;
+  color: ${(props) => (props.error ? "var(--color-error)" : "")};
+
+  :focus {
+    outline: ${(props) => (props.error ? "1px solid var(--color-error)" : "")};
+  }
 
   @media screen and (max-width: ${TABLET_WIDTH}) {
     padding: 12px;
@@ -60,8 +75,14 @@ export const Button = styled.button`
 `;
 
 const Error = styled.p`
+  position: absolute;
+  top: 10px;
   text-align: center;
   color: var(--color-error);
+
+  @media screen and (max-width: ${TABLET_WIDTH}) {
+    top: 0;
+  }
 `;
 
 type Inputs = {
@@ -72,27 +93,42 @@ const schema = yup
   .object({
     url: yup
       .string()
-      .matches(
-        /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm,
-        {
-          excludeEmptyString: true,
-        }
-      )
+      .matches(regex, {
+        excludeEmptyString: true,
+      })
       .required(),
   })
   .required();
 
-const Form = () => {
+interface FormProps {
+  setShorts: (x: IAdaptedData) => void;
+}
+
+const Form = ({ setShorts }: FormProps) => {
   const [isLoading, setIsLoading] = useState<boolean>();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    resetField,
   } = useForm<Inputs>({ resolver: yupResolver(schema) });
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = ({ url }) => {
+    setIsLoading(true);
+    api()
+      .get(url)
+      .then((data) => {
+        if (data.ok) {
+          setShorts(dataAdapter(data.result));
+          setIsLoading(false);
+          resetField("url");
+        }
+        setIsLoading(false);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
@@ -102,11 +138,14 @@ const Form = () => {
           {...register("url", { required: true })}
           placeholder="Shorten a link here..."
           type="text"
+          error={errors.url}
           disabled={isLoading}
         />
-        <Button type="submit">Shorten It!</Button>
+        <Error>{errors.url && <span>This field is accepting only URLs</span>}</Error>
+        <Button type="submit" disabled={isLoading}>
+          Shorten It!
+        </Button>
       </FormBlock>
-      <Error>{errors.url && <span>This field is required and accepting only urls</span>}</Error>
     </section>
   );
 };
