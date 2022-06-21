@@ -8,6 +8,10 @@ const Div = styled.div`
   overflow: hidden;
 
   @media screen and (min-width: ${TABLET_WIDTH}) {
+    padding: 40px 80px 0 80px;
+  }
+
+  @media screen and (min-width: 1150px) {
     padding: 40px 160px 0 160px;
   }
 `;
