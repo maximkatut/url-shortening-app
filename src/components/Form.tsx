@@ -1,18 +1,19 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { useForm, SubmitHandler, FieldError } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+
 import bg from "../img/bg-shorten-desktop.svg";
-import { regex, TABLET_WIDTH } from "../utils/variables";
-import { useState } from "react";
 
 import { api } from "../api";
+import { regex, TABLET_WIDTH } from "../utils/variables";
 import { dataAdapter, IAdaptedData } from "../utils/dataAdapter";
 
 const FormBlock = styled.form`
+  z-index: 10;
   display: flex;
   position: relative;
-  z-index: 10;
   margin-top: 50px;
   padding: 50px;
   background-image: url(${bg});
@@ -33,11 +34,11 @@ interface InputProps {
 }
 
 const Input = styled.input<InputProps>`
-  background-color: #fff;
-  padding: 20px 50px;
-  font-size: 22px;
   width: 75%;
   margin-right: 20px;
+  padding: 20px 50px;
+  background-color: #fff;
+  font-size: 22px;
   border-radius: 10px;
   color: ${(props) => (props.error ? "var(--color-error)" : "")};
 
@@ -46,19 +47,19 @@ const Input = styled.input<InputProps>`
   }
 
   @media screen and (max-width: ${TABLET_WIDTH}) {
-    padding: 12px;
     width: 100%;
+    padding: 12px;
     font-size: 18px;
     border-radius: 6px;
   }
 `;
 
 export const Button = styled.button`
+  padding: 20px 40px;
   background-color: var(--bg-cyan);
   font-size: 22px;
   font-weight: 700;
   color: white;
-  padding: 20px 40px;
   border-radius: 10px;
 
   &:hover {

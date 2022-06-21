@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import { IAdaptedData } from "../utils/dataAdapter";
 
 export const useLocalStorage = (key: string) => {

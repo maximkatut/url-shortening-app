@@ -1,10 +1,11 @@
-import { TABLET_WIDTH } from "../utils/variables";
 import styled from "styled-components";
 
+import { TABLET_WIDTH } from "../utils/variables";
+
 const MainBlock = styled.section`
+  overflow: hidden;
   position: relative;
   padding: 90px 0;
-  overflow: hidden;
 
   @media screen and (max-width: ${TABLET_WIDTH}) {
     text-align: center;
@@ -12,10 +13,10 @@ const MainBlock = styled.section`
 `;
 
 const Title = styled.h1`
-  font-size: 80px;
   width: 60%;
-  line-height: 90px;
   padding-top: 48px;
+  font-size: 80px;
+  line-height: 90px;
 
   @media screen and (max-width: ${TABLET_WIDTH}) {
     width: 100%;

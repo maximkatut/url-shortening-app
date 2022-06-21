@@ -1,15 +1,17 @@
 import styled from "styled-components";
+
 import boostImg from "../img/bg-boost-desktop.svg";
 import { Button } from "./Main";
+
 import { TABLET_WIDTH } from "../utils/variables";
 
 const BoostBlock = styled.section`
+  margin: 0 -160px;
   padding: 70px 0;
   background-image: url(${boostImg});
   background-repeat: no-repeat;
   background-size: cover;
   background-color: var(--bg-dark-blue);
-  margin: 0 -160px;
   text-align: center;
 
   @media screen and (max-width: ${TABLET_WIDTH}) {

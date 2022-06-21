@@ -1,5 +1,6 @@
-import { TABLET_WIDTH } from "../utils/variables";
 import styled from "styled-components";
+
+import { TABLET_WIDTH } from "../utils/variables";
 
 interface LiProps {
   signup?: boolean;

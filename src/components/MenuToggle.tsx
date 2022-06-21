@@ -1,6 +1,8 @@
 import styled from "styled-components";
+
 import burger from "../img/burger.svg";
 import cross from "../img/cross.svg";
+
 import { TABLET_WIDTH } from "../utils/variables";
 
 const Button = styled.button`

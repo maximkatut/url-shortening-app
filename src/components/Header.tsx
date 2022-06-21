@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+
 import MenuToggle from "./MenuToggle";
-import { TABLET_WIDTH } from "../utils/variables";
 import NavList from "./NavList";
+
+import { TABLET_WIDTH } from "../utils/variables";
 
 const HeaderBlock = styled.header`
   display: flex;
   flex-wrap: wrap;
-  font-size: 18px;
   margin-bottom: 16px;
+  font-size: 18px;
 
   @media screen and (min-width: ${TABLET_WIDTH}) {
     justify-content: space-between;

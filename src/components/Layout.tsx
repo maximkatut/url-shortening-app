@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { TABLET_WIDTH } from "../utils/variables";
 
 const Div = styled.div`
-  padding: 24px 24px 0 24px;
-  position: relative;
   overflow: hidden;
+  position: relative;
+  padding: 24px 24px 0 24px;
 
   @media screen and (min-width: ${TABLET_WIDTH}) {
     padding: 40px 80px 0 80px;
@@ -17,11 +17,11 @@ const Div = styled.div`
 `;
 
 const Img = styled.img`
-  width: 720px;
+  z-index: -1;
   position: absolute;
+  width: 720px;
   right: -115px;
   top: 170px;
-  z-index: -1;
 
   @media screen and (max-width: ${TABLET_WIDTH}) {
     width: 500px;

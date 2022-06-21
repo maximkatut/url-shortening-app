@@ -1,15 +1,17 @@
 import styled from "styled-components";
+
 import NavLink from "./NavLink";
+
 import { TABLET_WIDTH } from "../utils/variables";
 
 const Nav = styled.nav`
   z-index: 10;
   display: block;
   position: absolute;
+  width: 85%;
   top: 82px;
   left: 0;
   right: 0;
-  width: 85%;
   margin: 0 auto;
   padding: 10px 40px;
   text-align: center;
@@ -60,8 +62,8 @@ const NavListFirst = styled.ul`
 
   @media screen and (min-width: ${TABLET_WIDTH}) {
     display: flex;
-    padding: 0;
     margin: 0;
+    padding: 0;
   }
 `;
 
@@ -72,8 +74,8 @@ const NavListSecond = styled.ul`
 
   @media screen and (min-width: ${TABLET_WIDTH}) {
     display: flex;
-    padding: 0;
     margin: 0;
+    padding: 0;
   }
 `;
 

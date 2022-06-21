@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import SVG from "react-inlinesvg";
+
 import logo from "../img/logo.svg";
 
 import { TABLET_WIDTH } from "../utils/variables";
@@ -9,9 +10,9 @@ const FooterBlock = styled.footer`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  background-color: var(--color-text);
   margin: 0 -160px;
   padding: 52px 160px;
+  background-color: var(--color-text);
 
   @media screen and (max-width: ${TABLET_WIDTH}) {
     flex-wrap: wrap;
@@ -41,13 +42,13 @@ const List = styled.ul`
 `;
 
 const Item = styled.li`
-  font-weight: 500;
   margin-bottom: 8px;
+  font-weight: 500;
   color: var(--color-grey);
   :first-child {
-    color: white;
     margin-bottom: 20px;
     font-weight: 700;
+    color: white;
 
     a {
       color: white;

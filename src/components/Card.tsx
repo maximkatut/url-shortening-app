@@ -1,13 +1,6 @@
 import styled from "styled-components";
 import { TABLET_WIDTH } from "../utils/variables";
 
-interface IProps {
-  title: string;
-  desc: string;
-  style: object;
-  img: string;
-}
-
 interface LiProps {
   img: string;
 }
@@ -23,10 +16,10 @@ const CardBlock = styled.li<LiProps>`
   &:before {
     content: "";
     position: absolute;
-    top: -45px;
-    left: 35px;
     width: 90px;
     height: 90px;
+    top: -45px;
+    left: 35px;
     background-image: url(${(props) => props.img});
     background-repeat: no-repeat;
     background-position: 50%;
@@ -48,16 +41,23 @@ const CardBlock = styled.li<LiProps>`
 `;
 
 const Title = styled.h2`
-  font-size: 22px;
   margin-bottom: 10px;
+  font-size: 22px;
 `;
 
 const Desc = styled.h2`
   font-size: 15px;
+  font-weight: 500;
   line-height: 27px;
   color: var(--color-grey);
-  font-weight: 500;
 `;
+
+interface IProps {
+  title: string;
+  desc: string;
+  style: object;
+  img: string;
+}
 
 const Card = ({ title, desc, style, img }: IProps) => {
   return (
