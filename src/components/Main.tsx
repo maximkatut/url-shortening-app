@@ -12,7 +12,7 @@ const MainBlock = styled.section`
   }
 `;
 
-const Title = styled.h1`
+const Title = styled.h2`
   width: 60%;
   padding-top: 48px;
   font-size: 80px;

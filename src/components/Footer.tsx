@@ -85,6 +85,7 @@ const SocialImg = styled(SVG)`
 const Footer = () => {
   return (
     <FooterBlock>
+      <h2 className="visually-hidden">Footer</h2>
       <LogoImg src={logo} alt="Logo" />
       {FOOTER_MENU.map((arr: string[], index) => {
         return (

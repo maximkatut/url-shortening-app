@@ -134,6 +134,7 @@ const Form = ({ setShorts }: FormProps) => {
 
   return (
     <section>
+      <h2 className="visually-hidden">Create short link</h2>
       <FormBlock onSubmit={handleSubmit(onSubmit)}>
         <Input
           {...register("url", { required: true })}
